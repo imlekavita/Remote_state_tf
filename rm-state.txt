@@ -1,0 +1,82 @@
+Remote state
+
+
+rmstate: it keeps tf infrastructure
+it stores in the file called terraform.tfstate
+
+there is also backup of the previous state in terraform.tfstate backup
+ when you execute terraform apply
+a new terraform.tfstate and backup is written
+
+rm changes hit terraform apply again,terraform will make changes to meet the correct remote state
+ ex u teminate instance that is managed by terraform, after terraform apply it will be  started again.
+
+you can tf state version control
+for eg git
+
+allows collaborate 
+
+
+tf state can be saved backend functionality in terraform
+default is local backend
+include :
+s3
+consule
+
+it allows for collboration, the remote  state will always be available for the whole team
+ 
+two steps configure a remote state
+1 add backend code to a.tf filr
+2 run the initialization process
+
+
+
+
+you can also store your state in s3:
+
+terraform {
+  backend "s3" {
+    bucket = "mybucket"
+    key    = "terraform-myproject"
+    region = "us-east-1"
+  } 
+}
+
+============================================================0
+data"terraform_remote_state" "aws_state" {
+  backend "s3" 
+config{
+    bucket = "terraform-state"
+    key    = "terraform_tfstate"
+access_key =" "
+secret_key=" "
+    region = "us-east-1"
+}
+}
+
+
+terraform with s3
+first step go to aws sevices click s3
+create new bucket terraformbucket
+
+run aws configure
+access key=
+secret key 
+aws region
+
+  
+
+  } 
+}
+
+
+
+
+
+AWS Credentials
+credentials 
+
+
+state file will creted in aws
+ 
+
